@@ -35,6 +35,18 @@ public class PollService {
         return pollRepository.findById(id);
     }
 
+//    public ResponseEntity<?> getPoll(Long pollId){
+//
+//        verifyPoll(pollId);
+//
+//        Poll p = pollRepository.findById(pollId).orElse(null);
+//
+//        if (p == null){
+//            throw new ResourceNotFoundException("Throw works");
+//        }
+//        return new ResponseEntity<>(p, HttpStatus.OK);
+//    }
+
     //Create Poll Service
     public ResponseEntity<?> createPoll(Poll poll){
         poll = pollRepository.save(poll);

@@ -83,6 +83,10 @@ public class PollController {
                 return pollService.getById(id);
             }
         }
+//    @GetMapping("/polls/{id}")
+//    public ResponseEntity<?> getById(@PathVariable Long id){
+//        return pollService.getPoll(id)
+//    }
     //update request
     @RequestMapping(value = "/polls/{pollId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
