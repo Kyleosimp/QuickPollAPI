@@ -33,27 +33,39 @@ public class PollController {
     }
 
     //returns ALL polls contained within table
-    @RequestMapping(value = "/polls", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Poll>> getAllPolls(){
-        Iterable<Poll> allPolls = pollRepository.findAll();
-        return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/polls", method = RequestMethod.GET)
+//    public ResponseEntity<Iterable<Poll>> getAllPolls(){
+//        Iterable<Poll> allPolls = pollRepository.findAll();
+//        return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
+//    }
+//    @GetMapping("/polls")
+//    public Iterable<Poll> getAllPolls(){
+//        return demo;
+//    }
+
 
     //post/create request
-    @RequestMapping(value = "/polls", method = RequestMethod.POST)
-    public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll){
+//    @RequestMapping(value = "/polls", method = RequestMethod.POST)
+//    public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll){
+//
+//        poll = pollRepository.save(poll);
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newPollUri = ServletUriComponentsBuilder
+//                .fromCurrentRequest()
+//                .path("{pollId}")
+//                .buildAndExpand(poll.getId())
+//                .toUri();
+//        responseHeaders.setLocation(newPollUri);
+//        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+//
+//    }
 
-        poll = pollRepository.save(poll);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newPollUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("{pollId}")
-                .buildAndExpand(poll.getId())
-                .toUri();
-        responseHeaders.setLocation(newPollUri);
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
-
+    //new poll creation
+    @PostMapping("/polls")
+    public void createPoll(@Valid @RequestBody Poll poll){
+        pollService.createPoll(poll);
     }
+
 
 //    Individual get retrieval
 //    @RequestMapping(value = "/polls{pollId}", method = RequestMethod.GET)
@@ -78,6 +90,11 @@ public class PollController {
         Poll p = pollRepository.save(poll);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+//    @PutMapping("/polls/{id}")
+//    public void updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
+//        pollService.updatePoll(poll, pollId);
+//    }
+
     //poopoo delete request
 //    @RequestMapping(value = "/polls/{pollId}", method = RequestMethod.DELETE)
 //    public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
