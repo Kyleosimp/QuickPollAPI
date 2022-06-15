@@ -33,11 +33,11 @@ public class PollController {
     }
 
     //returns ALL polls contained within table
-//    @RequestMapping(value = "/polls", method = RequestMethod.GET)
-//    public ResponseEntity<Iterable<Poll>> getAllPolls(){
-//        Iterable<Poll> allPolls = pollRepository.findAll();
-//        return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/polls", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Poll>> getAllPolls(){
+        Iterable<Poll> allPolls = pollRepository.findAll();
+        return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
+    }
 //    @GetMapping("/polls")
 //    public Iterable<Poll> getAllPolls(){
 //        return demo;
