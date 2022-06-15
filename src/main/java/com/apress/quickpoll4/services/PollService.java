@@ -12,10 +12,12 @@ public class PollService {
     @Autowired
     private PollRepository pollRepository;
 
+    //Delete by ID Service
     public void deletePoll(Long id){
         pollRepository.deleteById(id);
     }
 
+    //Find by ID Service
     public Optional<Poll> getById(Long id){
         return pollRepository.findById(id);
     }
