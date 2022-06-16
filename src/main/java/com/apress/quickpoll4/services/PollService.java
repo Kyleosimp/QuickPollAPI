@@ -27,6 +27,7 @@ public class PollService {
 
     //Delete by ID Service
     public void deletePoll(Long id){
+        verifyPoll(id);
         pollRepository.deleteById(id);
     }
 

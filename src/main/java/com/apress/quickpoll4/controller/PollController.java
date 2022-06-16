@@ -5,15 +5,11 @@ import com.apress.quickpoll4.exception.ResourceNotFoundException;
 import com.apress.quickpoll4.repository.PollRepository;
 import com.apress.quickpoll4.services.PollService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -73,6 +69,8 @@ public class PollController {
 //        Optional<Poll> p = pollRepository.findById(pollId);
 //        return new ResponseEntity<>(p, HttpStatus.OK);
 //    }
+
+
     //Better Get Retrieval
     @GetMapping("/polls/{id}")
     public Optional<Poll> getById(@PathVariable Long id) {
@@ -87,6 +85,8 @@ public class PollController {
 //    public ResponseEntity<?> getById(@PathVariable Long id){
 //        return pollService.getPoll(id)
 //    }
+
+
     //update request
     @RequestMapping(value = "/polls/{pollId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
@@ -94,6 +94,7 @@ public class PollController {
         Poll p = pollRepository.save(poll);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 //    @PutMapping("/polls/{id}")
 //    public void updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
 //        pollService.updatePoll(poll, pollId);
