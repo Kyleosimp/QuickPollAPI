@@ -1,0 +1,98 @@
+Asynchronous Code
+	What is an asynchronous event?
+		because JS's single-threaded nature, it doesn't wait for asynchronous events to finish before continuing
+		
+			const getData = () => {
+				setTimeout( () => {
+				  return { data: ['there', 'is', 'stuff', 'here'] }
+			  }, 100)
+			}
+
+			const data = getData();
+			console.log(data);
+	How is this fixed?
+		Callbacks
+		A function that gets passed into another function as an argument
+			Callback gets passed in as a parameter into a function. When the asynchronous event completes, the callback function is executed
+				const getData = (cb) => {
+					setTimeout( () => {
+					  cb({ data: ['there', 'is', 'stuff', 'here'] })
+				  }, 100)
+				}
+
+				getData( data => {
+					console.log(data);
+				  });
+		Callbacks can be nested when there are multiple asynchronous operations to do
+	Promises
+		A promise is an object that encapsulates the result of an asynchronous operation
+		
+		To create a promise object, use the Promise() constructor
+			const promise = new Promise((resolve, reject) => {
+			  // contain an operation
+			  // ...
+
+			  // return the state
+			  if (success) {
+				resolve(value);
+			  } else {
+				reject(error);
+			  }
+			});
+		
+		A promise has the following states:
+		
+			Pending
+				In the beginning, the state of a promise is pending, indicating that the asynchronous operation is in 
+				progress. Depending on the result of the asynchronous operation, the state changes to either fulfilled 
+				or rejected.
+				
+			Fulfilled with a value
+			
+				resolve
+			
+			Rejected for a reason
+			
+				reject
+				
+		Consuming a promise
+		
+			then() 
+				allows you to get the value of a promise after it is fulfilled
+				
+				accepts two callback functions:
+					
+					onFulfilled
+						produces a value
+					
+					onRejected
+						spits out an error
+						
+				example:
+				
+					function getUsers() {
+					  return new Promise((resolve, reject) => {
+						setTimeout(() => {
+						  if (success) {
+							resolve([
+							  { username: 'john', email: 'john@test.com' },
+							  { username: 'jane', email: 'jane@test.com' },
+							]);
+						  } else {
+							reject('Failed to the user list');
+						  }
+						}, 1000);
+					  });
+					}
+
+					function onFulfilled(users) {
+					  console.log(users);
+					}
+					function onRejected(error) {
+					  console.log(error);
+					}
+
+					const promise = getUsers();
+					promise.then(onFulfilled, onRejected);
+		
+
